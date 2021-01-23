@@ -63,7 +63,7 @@ const Ratings = () => {
                     <h3>{rating.name}</h3>
                     <article id='star-container'>
                         {stars.map(star =>
-                            <StarFill class='star' color='gold'/>
+                            <StarFill className='star' key={star} color='gold'/>
                         )}
                     </article>
                 </section>
