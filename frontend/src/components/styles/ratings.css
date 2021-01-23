@@ -1,0 +1,25 @@
+
+.test{
+    display: flex;
+    justify-content: space-between;
+}
+#test1{
+    margin: 0 10% 1%;
+}
+#test1 > h3{
+    font-size: 200%;
+    font-weight: bold;
+    color: #686D8F;
+}
+#test2{
+    margin: 1% 25% 0 10%;
+    padding: 0 0 4%;
+    width: 65%;
+    font-size: 150%;
+    color: #686D8F;
+    display: flex;
+    justify-content: space-between;
+}
+#test2 > p{
+    width: 70%;
+}

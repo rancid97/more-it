@@ -10,11 +10,11 @@ const NavBar = () => {
                     <Nav className="ml-auto mr-auto font-weight-bold" >
                         <Nav.Link className='mr-4 ml-4' href="/">O nas</Nav.Link>
                         <NavDropdown className='mr-4 ml-4' title="Usługi Informatyczne" id="basic-nav-dropdown">
-                            <NavDropdown.Item href="uslugi/1">Action</NavDropdown.Item>
-                            <NavDropdown.Item href="uslugi/2">Another action</NavDropdown.Item>
-                            <NavDropdown.Item href="uslugi/3">Something</NavDropdown.Item>
+                            <NavDropdown.Item href="uslugi/1">Usługa 1</NavDropdown.Item>
+                            <NavDropdown.Item href="uslugi/2">Usługa 2</NavDropdown.Item>
+                            <NavDropdown.Item href="uslugi/3">Usługa 3</NavDropdown.Item>
                             <NavDropdown.Divider />
-                            <NavDropdown.Item href="uslugi/4">Separated link</NavDropdown.Item>
+                            <NavDropdown.Item href="uslugi/4">Usługa 4</NavDropdown.Item>
                         </NavDropdown>
                         <Nav.Link className='mr-4 ml-4' href="/opinie">Opinie</Nav.Link>
                         <Nav.Link className='mr-4 ml-4' href="/kontakt">Kontakt</Nav.Link>

@@ -1,8 +1,44 @@
-import React from 'react'
+import React, {useState} from 'react'
 import styled from 'styled-components'
+import {CircleFill, ArrowRight, ArrowLeft} from "react-bootstrap-icons";
 import './styles/about.css'
+import contents from "./content/servies";
+import {Link} from "react-router-dom";
+
 
 const About = () => {
+    const [colours, setColours] = useState([1,0,0,0,0]);
+    const [content, setContent] = useState(contents[0]);
+    let newArr = [...colours];
+    const changeColourRight = (arg) => {
+        let index = newArr.indexOf(1);
+        console.log(arg);
+        newArr[index] = 0;
+        switch(arg){
+            case 'left':
+                if(index !== 0){
+                    newArr[index - 1] = 1;
+                    setContent(contents[index - 1]);
+                } else {
+                    newArr[4] = 1;
+                    setContent(contents[4]);
+                }
+                break;
+            case 'right':
+                if(index !== 4){
+                    newArr[index + 1] = 1;
+                    setContent(contents[index + 1]);
+                } else {
+                    newArr[0] = 1;
+                    setContent(contents[0]);
+                }
+                break;
+            default:
+                break;
+        }
+
+        setColours(newArr);
+    }
     return (
         <Wrap>
             <Article>
@@ -42,28 +78,44 @@ const About = () => {
                 </Section>
             </Article>
             <Services>
-                <Test id='test'>
+                <CircleContainer>
+                    <ArrowLeft className='arrow' onClick={() => changeColourRight('left')}/>
+                    <CircleFill size={13} color={colours[0] === 1 ? '#686D8F' : '#F50D63'}/>
+                    <CircleFill size={13} color={colours[1] === 1 ? '#686D8F' : '#F50D63'}/>
+                    <CircleFill size={13} color={colours[2] === 1 ? '#686D8F' : '#F50D63'}/>
+                    <CircleFill size={13} color={colours[3] === 1 ? '#686D8F' : '#F50D63'}/>
+                    <CircleFill size={13} color={colours[4] === 1 ? '#686D8F' : '#F50D63'}/>
+                    <ArrowRight className='arrow' onClick={() => changeColourRight('right')}/>
+                </CircleContainer>
+                <Presentation id='pres'>
                     <h5>Rodzaj Usługi</h5>
                     <p>
-                        Przewijane slajdy z krótkimi opisami usług.<br/>
-                        Każdy funkcjonowałby jako odnośnik do podstrony,<br/>
-                        opisującej daną usługę
+                        {content}
                     </p>
                     <button>
-                        Czytaj więcej
+                        <Link id='pres-link' to={`/uslugi/${colours.indexOf(1) + 1}`}>Czytaj więcej</Link>
                     </button>
-                </Test>
+                </Presentation>
             </Services>
         </Wrap>
     )
 }
 const Wrap = styled.main`
-  margin: 2% 0;  
+  margin: 2% 0;
+  max-width: 100%;
+`
+const CircleContainer = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  width: 10vw;
+  margin: auto;
+  padding: 2% 0;
+  max-width: 100%;
 `
 const Article = styled.article`
   width: 100vw;
   background: #F5F5F5;
-  padding: 10vh 0 10vh;
+  padding: 5vh 0 10vh;
   display: flex;
   justify-content: space-evenly;
   max-width: 100%;
@@ -77,17 +129,19 @@ const Section = styled.section`
 const Services = styled.article`
   width: 100vw;
   background: #F5F5F5;
-  padding: 1% 0 2%;
+  padding: 0 0 2%;
   max-width: 100%;
 `
-const Test = styled.div`
+const Presentation = styled.div`
   background: #F50D63;
-  width: 40rem;
-  padding: 2% 2%;
-  border-radius: 10px;
+  width: 45rem;
+  padding: 1% 2%;
+  border-radius: 20px;
   color: white;
   text-align: center;
   margin: auto;
+  font-weight: bold;
+  transition: all ease-in 0.2s;
 `
 export default About;
 
