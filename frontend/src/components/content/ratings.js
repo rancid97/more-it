@@ -19,13 +19,13 @@ const ratings = [
     },
     {
         name: 'user4',
-        stars: 5,
+        stars: 3,
         text: 'polecam',
         service: 'service4'
     },
     {
         name: 'user5',
-        stars: 5,
+        stars: 1,
         text: 'polecam',
         service: 'service5'
     }

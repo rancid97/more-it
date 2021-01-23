@@ -1,17 +1,17 @@
 
-.test{
+.ratings-section{
     display: flex;
     justify-content: space-between;
 }
-#test1{
+#ratings-section1{
     margin: 0 10% 1%;
 }
-#test1 > h3{
+#ratings-section1 > h3{
     font-size: 200%;
     font-weight: bold;
     color: #686D8F;
 }
-#test2{
+#ratings-section2{
     margin: 1% 25% 0 10%;
     padding: 0 0 4%;
     width: 65%;
@@ -20,6 +20,15 @@
     display: flex;
     justify-content: space-between;
 }
-#test2 > p{
+#ratings-section2 > p{
     width: 70%;
+}
+#ratings-section2 > h4{
+    color: #F50D63;
+}
+#star-container{
+    width: 20%;
+}
+.star{
+    margin: 0 3%;
 }

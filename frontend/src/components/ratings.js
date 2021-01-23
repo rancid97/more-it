@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from "styled-components";
 import './styles/ratings.css'
 import {ArrowLeft, ArrowRight, CircleFill, StarFill} from "react-bootstrap-icons";
@@ -7,10 +7,20 @@ import ratings from "./content/ratings";
 const Ratings = () => {
     const [colours, setColours] = useState([1,0,0,0,0]);
     const [rating, setRating] = useState(ratings[0]);
-    let newArr = [...colours];
+    const [stars, setStars] = useState([]);
+
+    useEffect(() => {
+        let newArr = [];
+        for(let i = 0; i < rating.stars; i++){
+            newArr.push(i);
+        }
+        setStars(newArr);
+    }, [rating])
+
+
     const changeColourRight = (arg) => {
+        let newArr = [...colours];
         let index = newArr.indexOf(1);
-        console.log(arg);
         newArr[index] = 0;
         switch(arg){
             case 'left':
@@ -36,6 +46,7 @@ const Ratings = () => {
         }
         setColours(newArr);
     }
+
     return(
         <Main>
             <Wrap>
@@ -48,17 +59,15 @@ const Ratings = () => {
                     <CircleFill size={13} color={colours[4] === 1 ? '#686D8F' : '#F50D63'}/>
                     <ArrowRight className='arrow' onClick={() => changeColourRight('right')}/>
                 </CircleContainer>
-                <section className='test' id='test1'>
+                <section className='ratings-section' id='ratings-section1'>
                     <h3>{rating.name}</h3>
-                    <div>
-                        <StarFill color='gold'/>
-                        <StarFill color='gold'/>
-                        <StarFill color='gold'/>
-                        <StarFill color='gold'/>
-                        <StarFill color='gold'/>
-                    </div>
+                    <article id='star-container'>
+                        {stars.map(star =>
+                            <StarFill class='star' color='gold'/>
+                        )}
+                    </article>
                 </section>
-                <section className='test' id='test2'>
+                <section className='ratings-section' id='ratings-section2'>
                     <h4>
                         {rating.service}
                     </h4>
@@ -83,7 +92,7 @@ const CircleContainer = styled.div`
   max-width: 100%;
 `
 const Wrap = styled.div`
-  margin: 10vh 15vw;
+  margin: 10vh 20vw;
   background: #F5F5F5;
   min-height: 40vh;
 `
