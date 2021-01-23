@@ -2,21 +2,34 @@ import React, {useEffect, useState} from 'react';
 import styled from "styled-components";
 import './styles/ratings.css'
 import {ArrowLeft, ArrowRight, CircleFill, StarFill} from "react-bootstrap-icons";
-import ratings from "./content/ratings";
+import axios from "axios";
+
+
+//resolve text highlight on arrow click
 
 const Ratings = () => {
     const [colours, setColours] = useState([1,0,0,0,0]);
-    const [rating, setRating] = useState(ratings[0]);
     const [stars, setStars] = useState([]);
+    const [rating, setRating] = useState();
+    const [ratingIndex, setRatingIndex] = useState(0);
 
     useEffect(() => {
         let newArr = [];
-        for(let i = 0; i < rating.stars; i++){
-            newArr.push(i);
+        if(rating) {
+            for (let i = 0; i < rating[ratingIndex].stars; i++) {
+                newArr.push(i);
+            }
+            setStars(newArr);
         }
-        setStars(newArr);
-    }, [rating])
-
+    }, [rating, ratingIndex])
+    useEffect(() => {
+        axios.get('http://localhost:5000/ratings')
+            .then(res => {
+                console.log(res.data);
+                setRating(res.data);
+            })
+            .catch(err => console.log(err))
+    }, [])
 
     const changeColourRight = (arg) => {
         let newArr = [...colours];
@@ -26,19 +39,19 @@ const Ratings = () => {
             case 'left':
                 if(index !== 0){
                     newArr[index - 1] = 1;
-                    setRating(ratings[index - 1]);
+                    setRatingIndex(index - 1);
                 } else {
                     newArr[4] = 1;
-                    setRating(ratings[4]);
+                    setRatingIndex(4)
                 }
                 break;
             case 'right':
                 if(index !== 4){
                     newArr[index + 1] = 1;
-                    setRating(ratings[index + 1]);
+                    setRatingIndex(index + 1);
                 } else {
                     newArr[0] = 1;
-                    setRating(ratings[0]);
+                    setRatingIndex(0);
                 }
                 break;
             default:
@@ -60,7 +73,7 @@ const Ratings = () => {
                     <ArrowRight className='arrow' onClick={() => changeColourRight('right')}/>
                 </CircleContainer>
                 <section className='ratings-section' id='ratings-section1'>
-                    <h3>{rating.name}</h3>
+                    <h3>{rating && rating[ratingIndex].name}</h3>
                     <article id='star-container'>
                         {stars.map(star =>
                             <StarFill className='star' key={star} color='gold'/>
@@ -69,10 +82,10 @@ const Ratings = () => {
                 </section>
                 <section className='ratings-section' id='ratings-section2'>
                     <h4>
-                        {rating.service}
+                        {rating && rating[ratingIndex].service}
                     </h4>
                     <p>
-                        {rating.text}
+                        {rating && rating[ratingIndex].text}
                     </p>
                 </section>
             </Wrap>
@@ -80,7 +93,7 @@ const Ratings = () => {
     )
 }
 const Main = styled.main`
-  height: 60vh;
+  height: 50vh;
   margin: 20vh 0;
 `
 const CircleContainer = styled.div`
@@ -94,7 +107,7 @@ const CircleContainer = styled.div`
 const Wrap = styled.div`
   margin: 10vh 20vw;
   background: #F5F5F5;
-  min-height: 40vh;
+  min-height: 30vh;
 `
 
 export default Ratings;
