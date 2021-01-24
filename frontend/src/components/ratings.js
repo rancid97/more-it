@@ -65,11 +65,11 @@ const Ratings = () => {
             <Wrap>
                 <CircleContainer>
                     <ArrowLeft className='arrow' onClick={() => changeColourRight('left')}/>
-                    <CircleFill size={13} color={colours[0] === 1 ? '#686D8F' : '#F50D63'}/>
-                    <CircleFill size={13} color={colours[1] === 1 ? '#686D8F' : '#F50D63'}/>
-                    <CircleFill size={13} color={colours[2] === 1 ? '#686D8F' : '#F50D63'}/>
-                    <CircleFill size={13} color={colours[3] === 1 ? '#686D8F' : '#F50D63'}/>
-                    <CircleFill size={13} color={colours[4] === 1 ? '#686D8F' : '#F50D63'}/>
+                    <CircleFill size={13} color={colours[0] === 1 ? '#686D8F' : '#a70a44'}/>
+                    <CircleFill size={13} color={colours[1] === 1 ? '#686D8F' : '#a70a44'}/>
+                    <CircleFill size={13} color={colours[2] === 1 ? '#686D8F' : '#a70a44'}/>
+                    <CircleFill size={13} color={colours[3] === 1 ? '#686D8F' : '#a70a44'}/>
+                    <CircleFill size={13} color={colours[4] === 1 ? '#686D8F' : '#a70a44'}/>
                     <ArrowRight className='arrow' onClick={() => changeColourRight('right')}/>
                 </CircleContainer>
                 <section className='ratings-section' id='ratings-section1'>

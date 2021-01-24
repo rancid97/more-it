@@ -7,7 +7,7 @@ const ticketSchema = new Schema({
         type: String,
         required: true,
     },
-    description: {
+    email: {
         type: String,
         required: true
     },
@@ -16,14 +16,13 @@ const ticketSchema = new Schema({
         required: false,
         default: 'brak'
     },
-    email: {
-        type: Number,
+    service: {
+        type: String,
         required: true
     },
-    date: {
-        type: Date,
-        required: true,
-        default: Date.now()
+    content: {
+        type: String,
+        required: false
     }
 },{
     timestamps: true

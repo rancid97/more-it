@@ -43,10 +43,10 @@ const Left = styled.section`
   width: 35vw;
   margin: 0;
   display: inline-block;
-  color: #F50D63;
+  color: #a70a44;
 `
 const Right = styled.section`
-  background: #F50D63;
+  background: #a70a44;
   width: 65vw;
   margin: 0;
   padding: 0;

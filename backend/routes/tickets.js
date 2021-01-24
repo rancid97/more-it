@@ -11,11 +11,11 @@ router.route('/').get((req,res) => {
 //dodaj ticket
 router.route('/add').post((req,res) => {
     const username = req.body.username
-    const description = req.body.description
-    const phone = req.body.phone
     const email = req.body.email
-    const date = req.body.date
-    const newTicket = new Ticket({username,description,phone,email,date})
+    const phone = req.body.phone
+    const service = req.body.service
+    const content = req.body.content
+    const newTicket = new Ticket({username,email,phone,service,content})
 
     newTicket.save()
         .then(() => res.json('Ticket Added'))

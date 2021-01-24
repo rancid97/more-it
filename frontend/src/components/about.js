@@ -4,6 +4,7 @@ import {CircleFill, ArrowRight, ArrowLeft} from "react-bootstrap-icons";
 import './styles/about.css'
 import contents from "./content/servies";
 import {Link} from "react-router-dom";
+import {motion} from "framer-motion";
 
 
 const About = () => {
@@ -43,10 +44,10 @@ const About = () => {
         <Wrap>
             <Article>
                 <Section>
-                    <h5>
+                    <motion.h5 initial={{opacity: 0}} animate={{opacity: 1}} transition={{ease: "easeIn", duration: 0.4}}>
                         Pierwsza część opisu firmy
-                    </h5>
-                    <p>
+                    </motion.h5>
+                    <motion.p initial={{opacity: 0}} animate={{opacity: 1}} transition={{ ease: "easeIn", duration: 0.8 }}>
                         consectetur elit.<br/>
                         Praesent dictum cursus ex, quis faucibus nibh elementum a.<br/>
                         Pellentesque sit amet ligula felis non lectus accumsan.<br/>
@@ -57,13 +58,13 @@ const About = () => {
                         et dictum justo mollis quis. Nulla facilisi ipsum nec magna .<br/>
                         Suspendisse potenti Curabitur in ipsum nec magna.<br/>
                         Curabitur in ipsum nec magna placerat elementum
-                    </p>
+                    </motion.p>
                 </Section>
                 <Section>
-                    <h5>
+                    <motion.h5 initial={{opacity: 0}} animate={{opacity: 1}} transition={{ease: "easeIn", duration: 0.6}}>
                         Pierwsza część opisu firmy
-                    </h5>
-                    <p>
+                    </motion.h5>
+                    <motion.p initial={{opacity: 0}} animate={{opacity: 1}} transition={{ ease: "easeIn", duration: 0.8 }}>
                         consectetur elit.<br/>
                         Praesent dictum cursus ex, quis faucibus nibh elementum a.<br/>
                         Pellentesque sit amet ligula felis non lectus accumsan.<br/>
@@ -74,17 +75,17 @@ const About = () => {
                         et dictum justo mollis quis. Nulla facilisi ipsum nec magna .<br/>
                         Suspendisse potenti Curabitur in ipsum nec magna.<br/>
                         Curabitur in ipsum nec magna placerat elementum
-                    </p>
+                    </motion.p>
                 </Section>
             </Article>
-            <Services>
+            <Services initial={{opacity: 0}} animate={{opacity: 1}} transition={{ease: "easeIn", duration: 1}}>
                 <CircleContainer>
                     <ArrowLeft className='arrow' onClick={() => changeColourRight('left')}/>
-                    <CircleFill size={13} color={colours[0] === 1 ? '#686D8F' : '#F50D63'}/>
-                    <CircleFill size={13} color={colours[1] === 1 ? '#686D8F' : '#F50D63'}/>
-                    <CircleFill size={13} color={colours[2] === 1 ? '#686D8F' : '#F50D63'}/>
-                    <CircleFill size={13} color={colours[3] === 1 ? '#686D8F' : '#F50D63'}/>
-                    <CircleFill size={13} color={colours[4] === 1 ? '#686D8F' : '#F50D63'}/>
+                    <CircleFill size={13} color={colours[0] === 1 ? '#686D8F' : '#A70A44'}/>
+                    <CircleFill size={13} color={colours[1] === 1 ? '#686D8F' : '#a70a44'}/>
+                    <CircleFill size={13} color={colours[2] === 1 ? '#686D8F' : '#a70a44'}/>
+                    <CircleFill size={13} color={colours[3] === 1 ? '#686D8F' : '#a70a44'}/>
+                    <CircleFill size={13} color={colours[4] === 1 ? '#686D8F' : '#a70a44'}/>
                     <ArrowRight className='arrow' onClick={() => changeColourRight('right')}/>
                 </CircleContainer>
                 <Presentation id='pres'>
@@ -126,14 +127,14 @@ const Section = styled.section`
   padding: 0;
   color: #686D8F;
 `
-const Services = styled.article`
+const Services = motion.custom(styled.article`
   width: 100vw;
   background: #F5F5F5;
   padding: 0 0 2%;
   max-width: 100%;
-`
+`)
 const Presentation = styled.div`
-  background: #F50D63;
+  background: #a70a44;
   width: 45rem;
   padding: 1% 2%;
   border-radius: 20px;
