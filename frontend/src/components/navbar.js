@@ -13,11 +13,11 @@ const NavBar = () => {
                     <Nav className="ml-auto mr-auto font-weight-bold" >
                         <Nav.Link as={Link} className='mr-4 ml-4' to="/">O nas</Nav.Link>
                         <NavDropdown className='mr-4 ml-4' title="Usługi Informatyczne" id="basic-nav-dropdown">
-                            <NavDropdown.Item href="uslugi/1">Usługa 1</NavDropdown.Item>
-                            <NavDropdown.Item href="uslugi/2">Usługa 2</NavDropdown.Item>
-                            <NavDropdown.Item href="uslugi/3">Usługa 3</NavDropdown.Item>
+                            <NavDropdown.Item as={Link} to="uslugi/1">Usługa 1</NavDropdown.Item>
+                            <NavDropdown.Item as={Link} to="uslugi/2">Usługa 2</NavDropdown.Item>
+                            <NavDropdown.Item as={Link} to="uslugi/3">Usługa 3</NavDropdown.Item>
                             <NavDropdown.Divider />
-                            <NavDropdown.Item href="uslugi/4">Usługa 4</NavDropdown.Item>
+                            <NavDropdown.Item as={Link} to="uslugi/4">Usługa 4</NavDropdown.Item>
                         </NavDropdown>
                         <Nav.Link as={Link} className='mr-4 ml-4' to="/opinie">Opinie</Nav.Link>
                         <Nav.Link as={Link} className='mr-4 ml-4' to="/kontakt">Kontakt</Nav.Link>

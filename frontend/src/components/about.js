@@ -1,45 +1,44 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import styled from 'styled-components'
 import {CircleFill, ArrowRight, ArrowLeft} from "react-bootstrap-icons";
 import './styles/about.css'
-import contents from "./content/servies";
 import {Link} from "react-router-dom";
 import {motion} from "framer-motion";
+import axios from "axios";
 
 
 const About = () => {
-    const [colours, setColours] = useState([1,0,0,0,0]);
-    const [content, setContent] = useState(contents[0]);
-    let newArr = [...colours];
-    const changeColourRight = (arg) => {
-        let index = newArr.indexOf(1);
-        console.log(arg);
-        newArr[index] = 0;
-        switch(arg){
+    const [currentService, setCurrentService] = useState(null);
+    const [services, setServices] = useState(null);
+    const [index, setIndex] = useState(0);
+
+    useEffect(() => {
+        axios.get('http://localhost:5000/services')
+            .then(res => {
+                setServices(res.data)
+            })
+            .catch(err => console.log(err))
+    }, [])
+    useEffect(() => {
+        services && setCurrentService(services[index])
+    }, [services])
+    const indexHandler = (direction) => {
+        switch(direction){
             case 'left':
-                if(index !== 0){
-                    newArr[index - 1] = 1;
-                    setContent(contents[index - 1]);
-                } else {
-                    newArr[4] = 1;
-                    setContent(contents[4]);
-                }
+                index !== 0 ? setIndex(index - 1) : setIndex(services.length - 1);
                 break;
             case 'right':
-                if(index !== 4){
-                    newArr[index + 1] = 1;
-                    setContent(contents[index + 1]);
-                } else {
-                    newArr[0] = 1;
-                    setContent(contents[0]);
-                }
+                index !== services.length - 1 ? setIndex(index + 1) : setIndex(0);
                 break;
             default:
                 break;
         }
-
-        setColours(newArr);
     }
+
+    useEffect(() => {
+        services && setCurrentService(services[index]);
+    }, [index])
+
     return (
         <Wrap>
             <Article>
@@ -80,21 +79,19 @@ const About = () => {
             </Article>
             <Services initial={{opacity: 0}} animate={{opacity: 1}} transition={{ease: "easeIn", duration: 1}}>
                 <CircleContainer>
-                    <ArrowLeft className='arrow' onClick={() => changeColourRight('left')}/>
-                    <CircleFill size={13} color={colours[0] === 1 ? '#686D8F' : '#A70A44'}/>
-                    <CircleFill size={13} color={colours[1] === 1 ? '#686D8F' : '#a70a44'}/>
-                    <CircleFill size={13} color={colours[2] === 1 ? '#686D8F' : '#a70a44'}/>
-                    <CircleFill size={13} color={colours[3] === 1 ? '#686D8F' : '#a70a44'}/>
-                    <CircleFill size={13} color={colours[4] === 1 ? '#686D8F' : '#a70a44'}/>
-                    <ArrowRight className='arrow' onClick={() => changeColourRight('right')}/>
+                    <ArrowLeft className='arrow' onClick={() => indexHandler('left')}/>
+                    {services && services.map(item =>
+                        <CircleFill size={13} key={item.name} color={item.name === services[index].name ? '#a70a44' : '#686D8F' }/>
+                    )}
+                    <ArrowRight className='arrow' onClick={() => indexHandler('right')}/>
                 </CircleContainer>
                 <Presentation id='pres'>
-                    <h5>Rodzaj Usługi</h5>
+                    <h5>{currentService && currentService.name}</h5>
                     <p>
-                        {content}
+                        {currentService && currentService.shortDescription}
                     </p>
                     <button>
-                        <Link id='pres-link' to={`/uslugi/${colours.indexOf(1) + 1}`}>Czytaj więcej</Link>
+                        <Link id='pres-link' to={`/uslugi/${currentService && currentService.name}`}>Czytaj więcej</Link>
                     </button>
                 </Presentation>
             </Services>
