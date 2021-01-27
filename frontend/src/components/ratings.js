@@ -89,6 +89,7 @@ const Ratings = () => {
                     </p>
                 </section>
             </Wrap>
+            
         </Main>
     )
 }
