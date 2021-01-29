@@ -25,7 +25,7 @@ const Service = ({match, services}) => {
                     </motion.ul>
                 </section>
             </Article>
-            <button><Link style={{color: 'white'}} to={`/kontakt/${match.params.name}`}>Zamów</Link></button>
+            <button><Link style={{color: 'white'}} to={`/kontakt`}>Zamów</Link></button>
         </Wrap>
     )
 }

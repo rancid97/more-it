@@ -26,7 +26,7 @@ const App = () => {
           <Route path='/users' component={UserList}/>
           <Route path='/uslugi/:name' render={() => <Service services={services}/>}/>
           <Route path='/opinie' component={Ratings}/>
-          <Route path='/kontakt' render={() => <Contact services={services}/>}/>
+          <Route path='/kontakt' exact render={() => <Contact services={services}/>}/>
           <Route path='/kontakt/:service' render={() => <Contact services={services}/>}/>
           <Footer/>
       </Router>

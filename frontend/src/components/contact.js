@@ -1,15 +1,19 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from "styled-components";
 import {Button, Form} from "react-bootstrap";
 import {withRouter} from "react-router-dom"
 import axios from "axios";
 
-const Contact = ({match,services}) => {
+const Contact = ({services}) => {
     const [username,setUserName] = useState('');
     const [email,setEmail] = useState('');
     const [phone,setPhone] = useState('');
     const [service,setService] = useState('');
     const [content,setContent] = useState('');
+    const [added, setAdded] = useState(false);
+    useEffect(() => {
+        services && setService(services[0].name);
+    }, [services])
     const nameHandler = (e) => {
         setUserName(e.target.value);
     }
@@ -34,7 +38,15 @@ const Contact = ({match,services}) => {
             content: content
         }
         axios.post('http://localhost:5000/tickets/add', ticket)
-            .then(res => console.log(res.data));
+            .then(res => {
+                if(res.data === 'Ticked Added'){
+                    setAdded(true);
+                } else {
+                    setAdded(false);
+                    console.log(res.data);
+                }
+            });
+
     }
     return(
         <Wrap>
@@ -53,7 +65,7 @@ const Contact = ({match,services}) => {
                 </Form.Group>
                 <Form.Group controlId="service">
                     <Form.Label>Rodzaj usługi</Form.Label>
-                    <Form.Control as="select"  onChange={serviceHandler}>
+                    <Form.Control as="select" onChange={serviceHandler}>
                         {services && services.map(item =>
                             <option key={item.name}>{item.name}</option>
                         )}
@@ -67,6 +79,7 @@ const Contact = ({match,services}) => {
                     Wyślij
                 </Button>
             </Form>
+            {added && <p>Wysłano</p>}
         </Wrap>
     )
 }
