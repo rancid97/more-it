@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
 import styled from "styled-components";
 import {Button, Form} from "react-bootstrap";
+import {withRouter} from "react-router-dom"
 import axios from "axios";
 
-const Contact = () => {
+const Contact = ({match,services}) => {
     const [username,setUserName] = useState('');
     const [email,setEmail] = useState('');
     const [phone,setPhone] = useState('');
@@ -24,7 +25,7 @@ const Contact = () => {
     const serviceHandler = (e) => {
         setService(e.target.value);
     }
-    const sendFormHandler = (e) => {
+    const sendFormHandler = () => {
         const ticket = {
             username: username,
             email: email,
@@ -52,12 +53,10 @@ const Contact = () => {
                 </Form.Group>
                 <Form.Group controlId="service">
                     <Form.Label>Rodzaj usługi</Form.Label>
-                    <Form.Control as="select" onChange={serviceHandler}>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
+                    <Form.Control as="select"  onChange={serviceHandler}>
+                        {services && services.map(item =>
+                            <option key={item.name}>{item.name}</option>
+                        )}
                     </Form.Control>
                 </Form.Group>
                 <Form.Group controlId="content">
@@ -72,7 +71,7 @@ const Contact = () => {
     )
 }
 
-export default Contact;
+export default withRouter(Contact);
 
 const Wrap = styled.main`
   background: #F5F5F5;

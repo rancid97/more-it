@@ -1,9 +1,14 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import {Navbar, Nav, NavDropdown} from "react-bootstrap";
 import {motion} from "framer-motion";
 import {Link} from "react-router-dom";
+import {withRouter} from "react-router-dom";
 
-const NavBar = () => {
+const NavBar = ({services}) => {
+    const [service, setService] = useState(null);
+    useEffect(() => {
+       services && setService(services);
+    },[services])
     return (
         <motion.main initial={{x: -200, opacity: 0}} animate={{x: 0, opacity: 1}} transition={{ease: "easeIn", duration: 1}} exit={{ opacity: 1 }}>
             <Navbar bg="light" expand="lg">
@@ -13,11 +18,9 @@ const NavBar = () => {
                     <Nav className="ml-auto mr-auto font-weight-bold" >
                         <Nav.Link as={Link} className='mr-4 ml-4' to="/">O nas</Nav.Link>
                         <NavDropdown className='mr-4 ml-4' title="Usługi Informatyczne" id="basic-nav-dropdown">
-                            <NavDropdown.Item as={Link} to="uslugi/1">Usługa 1</NavDropdown.Item>
-                            <NavDropdown.Item as={Link} to="uslugi/2">Usługa 2</NavDropdown.Item>
-                            <NavDropdown.Item as={Link} to="uslugi/3">Usługa 3</NavDropdown.Item>
-                            <NavDropdown.Divider />
-                            <NavDropdown.Item as={Link} to="uslugi/4">Usługa 4</NavDropdown.Item>
+                            {service && service.map(item =>
+                                <NavDropdown.Item as={Link} key={item._id} to={`/uslugi/${item.name}`}>{item.name}</NavDropdown.Item>
+                            )}
                         </NavDropdown>
                         <Nav.Link as={Link} className='mr-4 ml-4' to="/opinie">Opinie</Nav.Link>
                         <Nav.Link as={Link} className='mr-4 ml-4' to="/kontakt">Kontakt</Nav.Link>
@@ -28,4 +31,4 @@ const NavBar = () => {
     )
 }
 
-export default NavBar
+export default withRouter(NavBar);

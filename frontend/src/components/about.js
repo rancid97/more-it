@@ -4,31 +4,26 @@ import {CircleFill, ArrowRight, ArrowLeft} from "react-bootstrap-icons";
 import './styles/about.css'
 import {Link} from "react-router-dom";
 import {motion} from "framer-motion";
-import axios from "axios";
+import {withRouter} from "react-router-dom";
 
-
-const About = () => {
+const About = ({services}) => {
     const [currentService, setCurrentService] = useState(null);
-    const [services, setServices] = useState(null);
+    const [servicesList, setServicesList] = useState(null);
     const [index, setIndex] = useState(0);
 
     useEffect(() => {
-        axios.get('http://localhost:5000/services')
-            .then(res => {
-                setServices(res.data)
-            })
-            .catch(err => console.log(err))
-    }, [])
-    useEffect(() => {
-        services && setCurrentService(services[index])
+                setServicesList(services)
     }, [services])
+    useEffect(() => {
+        servicesList && setCurrentService(servicesList[index])
+    }, [servicesList, index])
     const indexHandler = (direction) => {
         switch(direction){
             case 'left':
-                index !== 0 ? setIndex(index - 1) : setIndex(services.length - 1);
+                index !== 0 ? setIndex(index - 1) : setIndex(servicesList.length - 1);
                 break;
             case 'right':
-                index !== services.length - 1 ? setIndex(index + 1) : setIndex(0);
+                index !== servicesList.length - 1 ? setIndex(index + 1) : setIndex(0);
                 break;
             default:
                 break;
@@ -36,8 +31,8 @@ const About = () => {
     }
 
     useEffect(() => {
-        services && setCurrentService(services[index]);
-    }, [index])
+        servicesList && setCurrentService(servicesList[index]);
+    }, [servicesList, index])
 
     return (
         <Wrap>
@@ -80,8 +75,8 @@ const About = () => {
             <Services initial={{opacity: 0}} animate={{opacity: 1}} transition={{ease: "easeIn", duration: 1}}>
                 <CircleContainer>
                     <ArrowLeft className='arrow' onClick={() => indexHandler('left')}/>
-                    {services && services.map(item =>
-                        <CircleFill size={13} key={item.name} color={item.name === services[index].name ? '#a70a44' : '#686D8F' }/>
+                    {servicesList && servicesList.map(item =>
+                        <CircleFill size={13} key={item.name} color={item.name === servicesList[index].name ? '#a70a44' : '#686D8F' }/>
                     )}
                     <ArrowRight className='arrow' onClick={() => indexHandler('right')}/>
                 </CircleContainer>
@@ -134,13 +129,13 @@ const Presentation = styled.div`
   background: #a70a44;
   width: 45rem;
   padding: 1% 2%;
-  border-radius: 20px;
+  border-radius: 1rem;
   color: white;
   text-align: center;
   margin: auto;
   font-weight: bold;
   transition: all ease-in 0.2s;
 `
-export default About;
+export default withRouter(About);
 
 

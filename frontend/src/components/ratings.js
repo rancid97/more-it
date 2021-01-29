@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import styled from "styled-components";
 import './styles/ratings.css'
 import {ArrowLeft, ArrowRight, CircleFill, StarFill} from "react-bootstrap-icons";
+import {motion} from "framer-motion";
 import axios from "axios";
 
 
@@ -25,7 +26,6 @@ const Ratings = () => {
     useEffect(() => {
         axios.get('http://localhost:5000/ratings')
             .then(res => {
-                console.log(res.data);
                 setRating(res.data);
             })
             .catch(err => console.log(err))
@@ -61,7 +61,7 @@ const Ratings = () => {
     }
 
     return(
-        <Main>
+        <Main initial={{opacity: 0, x: 1000}} animate={{opacity: 1, x: 0}} transition={{ease: "easeIn", duration: 1 }}>
             <Wrap>
                 <CircleContainer>
                     <ArrowLeft className='arrow' onClick={() => changeColourRight('left')}/>
@@ -89,14 +89,14 @@ const Ratings = () => {
                     </p>
                 </section>
             </Wrap>
-            
+
         </Main>
     )
 }
-const Main = styled.main`
+const Main = motion.custom(styled.main`
   height: 50vh;
   margin: 20vh 0;
-`
+`)
 const CircleContainer = styled.div`
   display: flex;
   justify-content: space-evenly;
