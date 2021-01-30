@@ -7,6 +7,7 @@ import Footer from "./components/footer";
 import Ratings from "./components/ratings";
 import Contact from "./components/contact";
 import Service from "./components/service";
+import Admin from "./components/admin";
 import axios from "axios";
 
 const App = () => {
@@ -28,6 +29,7 @@ const App = () => {
           <Route path='/opinie' component={Ratings}/>
           <Route path='/kontakt' exact render={() => <Contact services={services}/>}/>
           <Route path='/kontakt/:service' render={() => <Contact services={services}/>}/>
+          <Route path='/admin' component={Admin}/>
           <Footer/>
       </Router>
   )

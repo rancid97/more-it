@@ -23,6 +23,10 @@ const ticketSchema = new Schema({
     content: {
         type: String,
         required: false
+    },
+    isRead : {
+        type: Boolean,
+        default: false
     }
 },{
     timestamps: true

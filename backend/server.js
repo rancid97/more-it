@@ -22,11 +22,13 @@ const ticketsRouter = require('./routes/tickets')
 const usersRouter = require('./routes/users')
 const ratingsRouter = require('./routes/ratings')
 const serviceRouter = require('./routes/services')
+const adminRouter = require('./routes/admin')
 
 app.use('/tickets', ticketsRouter)
 app.use('/users', usersRouter)
 app.use('/ratings', ratingsRouter)
 app.use('/services', serviceRouter)
+app.use('/admin', adminRouter)
 
 
 app.listen(port, () => {
