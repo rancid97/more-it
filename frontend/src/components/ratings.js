@@ -24,7 +24,7 @@ const Ratings = () => {
         }
     }, [rating, ratingIndex])
     useEffect(() => {
-        axios.get('http://localhost:5000/ratings')
+        axios.get('https://moreit.herokuapp.com/ratings')
             .then(res => {
                 setRating(res.data);
             })
