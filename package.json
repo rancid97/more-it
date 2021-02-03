@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "cd frontend && npm run build",
-    "install-client": "cd frontend && npm install",
+    "build": "cd backend/frontend && npm run build",
+    "install-client": "cd backend/frontend && npm install",
     "heroku-postbuild": "npm run install-client && npm run build",
     "start": "nodemon backend/server.js"
   },
