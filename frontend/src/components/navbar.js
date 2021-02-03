@@ -24,6 +24,7 @@ const NavBar = ({services}) => {
                         </NavDropdown>
                         <Nav.Link as={Link} className='mr-4 ml-4' to="/opinie">Opinie</Nav.Link>
                         <Nav.Link as={Link} className='mr-4 ml-4' to="/kontakt">Kontakt</Nav.Link>
+                        <Nav.Link as={Link} className='mr-4 ml-4' to="/admin">Admin</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
