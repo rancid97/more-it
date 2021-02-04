@@ -34,7 +34,7 @@ const Wrap = styled.main`
   margin: 2% 0;
   max-width: 100%;
   button{
-    margin: 5% auto;
+    margin: 2% auto;
     padding: 1rem 2rem;
     display: block;
     background: #a70a44;
