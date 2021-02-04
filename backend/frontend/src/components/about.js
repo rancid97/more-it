@@ -56,7 +56,7 @@ const About = ({services}) => {
                 </Section>
                 <Section>
                     <motion.h5 initial={{opacity: 0}} animate={{opacity: 1}} transition={{ease: "easeIn", duration: 0.6}}>
-                        Pierwsza część opisu firmy
+                        Druga część opisu firmy
                     </motion.h5>
                     <motion.p initial={{opacity: 0}} animate={{opacity: 1}} transition={{ ease: "easeIn", duration: 0.8 }}>
                         consectetur elit.<br/>
@@ -104,6 +104,10 @@ const CircleContainer = styled.div`
   margin: auto;
   padding: 2% 0;
   max-width: 100%;
+  @media screen and (max-width: 768px){
+    width: 40vw;
+    max-width: 100vw;
+  }
 `
 const Article = styled.article`
   width: 100vw;
@@ -112,6 +116,10 @@ const Article = styled.article`
   display: flex;
   justify-content: space-evenly;
   max-width: 100%;
+  @media screen and (max-width: 768px){
+    display: flex;
+    flex-direction: column;
+  }
 `
 const Section = styled.section`
   display: inline-block;
@@ -124,6 +132,8 @@ const Services = motion.custom(styled.article`
   background: #F5F5F5;
   padding: 0 0 2%;
   max-width: 100%;
+  
+  
 `)
 const Presentation = styled.div`
   background: #a70a44;
@@ -135,6 +145,10 @@ const Presentation = styled.div`
   margin: auto;
   font-weight: bold;
   transition: all ease-in 0.2s;
+
+  @media screen and (max-width: 768px){
+    max-width: 100vw;
+  }
 `
 export default withRouter(About);
 

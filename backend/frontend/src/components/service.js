@@ -55,10 +55,18 @@ const Article = styled.article`
     max-width: 50%;
     padding: 1rem 0;
     font-size: 120%;
+
+    @media screen and (max-width: 768px){
+      min-width: 100%;
+      padding: 0;
+      margin: 0;
+    }
+    
   }
   
   ul{
     font-weight: bold;
+    margin: 10% 0 !important;
   }
   
   h3{

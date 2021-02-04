@@ -37,6 +37,11 @@ const Wrap = styled.div`
   max-width: 100%;
   align-items: stretch;
   background: #F5F5F5;
+  @media screen and (max-width: 768px){
+    section{
+      width: 100%;
+    }
+  }
 `
 const Left = styled.section`
   padding: 2% 2% 1%;
@@ -56,6 +61,9 @@ const Right = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
+  @media screen and (max-width: 768px){
+    display: none;
+  }
 `
 const H5 = styled.h5`
   display: inline-block;

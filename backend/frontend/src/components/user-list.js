@@ -4,7 +4,7 @@ import axios from "axios";
 const UserList = () => {
     const [userNames, setUserNames] = useState([]);
     useEffect(() => {
-        axios.get('https://moreit.herokuapp.com/users')
+        axios.get('https://localhost:5000/users')
             .then(res => {
                 setUserNames(res.data);
             })
@@ -20,3 +20,4 @@ const UserList = () => {
 }
 
 export default UserList;
+

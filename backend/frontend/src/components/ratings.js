@@ -96,6 +96,9 @@ const Ratings = () => {
 const Main = motion.custom(styled.main`
   height: 50vh;
   margin: 20vh 0;
+  @media screen and (max-width: 768px){
+    margin: 0;
+  }
 `)
 const CircleContainer = styled.div`
   display: flex;
@@ -104,11 +107,30 @@ const CircleContainer = styled.div`
   margin: auto;
   padding: 2% 0;
   max-width: 100%;
+  @media screen and (max-width: 768px){
+    width: 80%;
+  }
 `
 const Wrap = styled.div`
   margin: 10vh 20vw;
   background: #F5F5F5;
   min-height: 30vh;
+  @media screen and (max-width: 768px){
+    margin: 1vh 0;
+    section {
+      text-align: center;
+      display: block;
+      #star-container{
+        width: 100%;
+      }
+    }
+    #ratings-section2{
+      display: flex;
+      flex-direction: column;
+      margin: 2% auto;
+      text-align: left;
+    }
+  }
 `
 
 export default Ratings;
