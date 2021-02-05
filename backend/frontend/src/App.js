@@ -12,6 +12,7 @@ import axios from "axios";
 
 const App = () => {
     const [services, setServices] = useState(null);
+    const [ratings, setRatings] = useState(null);
     useEffect(() => {
         axios.get('http://localhost:5000/services')
             .then(res => {
@@ -19,6 +20,13 @@ const App = () => {
             })
             .catch(err => console.log(err))
     },[])
+    useEffect(() => {
+        axios.get('https://moreit.herokuapp.com/ratings')
+            .then(res => {
+                setRatings(res.data);
+            })
+            .catch(err => console.log(err))
+    }, [])
   return (
       <Router>
           <NavBar services={services}/>
@@ -26,7 +34,7 @@ const App = () => {
           <Route path='/' exact render={() => <About services={services}/>}/>
           <Route path='/users' component={UserList}/>
           <Route path='/uslugi/:name' render={() => <Service services={services}/>}/>
-          <Route path='/opinie' component={Ratings}/>
+          <Route path='/opinie' render={() => <Ratings ratings={ratings}/>}/>
           <Route path='/kontakt' exact render={() => <Contact services={services}/>}/>
           <Route path='/kontakt/:service' render={() => <Contact services={services}/>}/>
           <Route path='/admin' component={Admin}/>

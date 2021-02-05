@@ -1,136 +1,49 @@
 import React, {useEffect, useState} from 'react';
 import styled from "styled-components";
 import './styles/ratings.css'
-import {ArrowLeft, ArrowRight, CircleFill, StarFill} from "react-bootstrap-icons";
 import {motion} from "framer-motion";
-import axios from "axios";
-
-
+import Opinion from "./opinon";
+import {CardDeck} from "react-bootstrap";
 //resolve text highlight on arrow click
 
-const Ratings = () => {
-    const [colours, setColours] = useState([1,0,0,0,0]);
-    const [stars, setStars] = useState([]);
-    const [rating, setRating] = useState();
-    const [ratingIndex, setRatingIndex] = useState(0);
-
+const Ratings = ({ratings}) => {
+    const [rating, setRating] = useState(null);
     useEffect(() => {
-        let newArr = [];
-        if(rating) {
-            for (let i = 0; i < rating[ratingIndex].stars; i++) {
-                newArr.push(i);
-            }
-            setStars(newArr);
-        }
-    }, [rating, ratingIndex])
-    useEffect(() => {
-        axios.get('https://moreit.herokuapp.com/ratings')
-            .then(res => {
-                setRating(res.data);
-            })
-            .catch(err => console.log(err))
-    }, [])
-
-    const changeColourRight = (arg) => {
-        let newArr = [...colours];
-        let index = newArr.indexOf(1);
-        newArr[index] = 0;
-        switch(arg){
-            case 'left':
-                if(index !== 0){
-                    newArr[index - 1] = 1;
-                    setRatingIndex(index - 1);
-                } else {
-                    newArr[4] = 1;
-                    setRatingIndex(4)
-                }
-                break;
-            case 'right':
-                if(index !== 4){
-                    newArr[index + 1] = 1;
-                    setRatingIndex(index + 1);
-                } else {
-                    newArr[0] = 1;
-                    setRatingIndex(0);
-                }
-                break;
-            default:
-                break;
-        }
-        setColours(newArr);
-    }
+        ratings && setRating(ratings);
+    }, [ratings])
 
     return(
-        <Main initial={{opacity: 0, x: 1000}} animate={{opacity: 1, x: 0}} transition={{ease: "easeIn", duration: 1 }}>
-            <Wrap>
-                <CircleContainer>
-                    <ArrowLeft className='arrow' onClick={() => changeColourRight('left')}/>
-                    <CircleFill size={13} color={colours[0] === 1 ? '#686D8F' : '#a70a44'}/>
-                    <CircleFill size={13} color={colours[1] === 1 ? '#686D8F' : '#a70a44'}/>
-                    <CircleFill size={13} color={colours[2] === 1 ? '#686D8F' : '#a70a44'}/>
-                    <CircleFill size={13} color={colours[3] === 1 ? '#686D8F' : '#a70a44'}/>
-                    <CircleFill size={13} color={colours[4] === 1 ? '#686D8F' : '#a70a44'}/>
-                    <ArrowRight className='arrow' onClick={() => changeColourRight('right')}/>
-                </CircleContainer>
-                <section className='ratings-section' id='ratings-section1'>
-                    <h3>{rating && rating[ratingIndex].name}</h3>
-                    <article id='star-container'>
-                        {stars.map(star =>
-                            <StarFill className='star' key={star} color='gold'/>
-                        )}
-                    </article>
-                </section>
-                <section className='ratings-section' id='ratings-section2'>
-                    <h4>
-                        {rating && rating[ratingIndex].service}
-                    </h4>
-                    <p>
-                        {rating && rating[ratingIndex].text}
-                    </p>
-                </section>
-            </Wrap>
-
+        <Main initial={{opacity: 0}} animate={{opacity: 1}} transition={{ease: "easeIn", duration: 0.6 }}>
+            <h3>Zobacz co sądzą o nas nasi klienci</h3>
+            <CardDeck>
+            {rating && rating.map((data) =>
+                <Opinion key={data._id} rating={data}/>
+            )}
+            </CardDeck>
         </Main>
     )
 }
-const Main = motion.custom(styled.main`
-  height: 50vh;
-  margin: 20vh 0;
-  @media screen and (max-width: 768px){
+const Main = motion.custom(styled.article`
+  //height: 50vh;
+  //margin: 20vh 0;
+  text-align: center;
+  h3{
+    font-weight: bold;
+    margin: 3% 0;
+    display: block;
+    color: #686D8F;
+  }
+  section {
+    margin: 20vh auto 20vh;
+    @media screen and(max-width: 1440px){
+      margin: 0;
+    }
+  }
+  
+
+  @media screen and (max-width: 768px) {
     margin: 0;
   }
 `)
-const CircleContainer = styled.div`
-  display: flex;
-  justify-content: space-evenly;
-  width: 10vw;
-  margin: auto;
-  padding: 2% 0;
-  max-width: 100%;
-  @media screen and (max-width: 768px){
-    width: 80%;
-  }
-`
-const Wrap = styled.div`
-  margin: 10vh 20vw;
-  background: #F5F5F5;
-  min-height: 30vh;
-  @media screen and (max-width: 768px){
-    margin: 1vh 0;
-    section {
-      text-align: center;
-      display: block;
-      #star-container{
-        width: 100%;
-      }
-    }
-    #ratings-section2{
-      display: flex;
-      flex-direction: column;
-      margin: 2% auto;
-      text-align: left;
-    }
-  }
-`
 
 export default Ratings;
