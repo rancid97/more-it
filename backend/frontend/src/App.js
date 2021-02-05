@@ -13,7 +13,7 @@ import axios from "axios";
 const App = () => {
     const [services, setServices] = useState(null);
     useEffect(() => {
-        axios.get('https://moreit.herokuapp.com/services')
+        axios.get('http://localhost:5000/services')
             .then(res => {
                 setServices(res.data);
             })
