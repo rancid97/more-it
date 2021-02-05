@@ -37,7 +37,7 @@ const Contact = ({services}) => {
             service: service,
             content: content
         }
-        axios.post('http://localhost:5000/tickets/add', ticket)
+        axios.post('https://moreit.herokuapp.com/tickets/add', ticket)
             .then(res => {
                 if(res.data === 'Ticked Added'){
                     setAdded(true);
