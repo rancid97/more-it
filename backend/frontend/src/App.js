@@ -14,7 +14,7 @@ const App = () => {
     const [services, setServices] = useState(null);
     const [ratings, setRatings] = useState(null);
     useEffect(() => {
-        axios.get('http://localhost:5000/services')
+        axios.get('https://moreit.herokuapp.com/services')
             .then(res => {
                 setServices(res.data);
             })

@@ -9,14 +9,14 @@ const Admin = () => {
         const credentials = {
             password: password.toString()
         }
-        axios.post('http://localhost:5000/admin/add', credentials)
+        axios.post('https://moreit.herokuapp.com/admin/add', credentials)
             .then(res => setResponse(res.data));
     }
     const passwordHandler = (e) => {
         setPassword(e.target.value);
     }
     const deleteTicketHandler = (id) => {
-        axios.delete('http://localhost:5000/admin/delete', {data: {id:id}})
+        axios.delete('https://moreit.herokuapp.com/admin/delete', {data: {id:id}})
             .then(res => console.log(res.data))
             .then(checkCredentials)
     }
@@ -24,7 +24,7 @@ const Admin = () => {
         const ticket = {
             id: id
         }
-        axios.post('http://localhost:5000/admin/update',ticket)
+        axios.post('https://moreit.herokuapp.com/admin/update',ticket)
             .then(res => console.log(res))
             .then(checkCredentials)
     }
