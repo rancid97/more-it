@@ -5,6 +5,7 @@ import './styles/about.css'
 import {Link} from "react-router-dom";
 import {motion} from "framer-motion";
 import {withRouter} from "react-router-dom";
+import Pres from "./Pres";
 
 const About = ({services}) => {
     const [currentService, setCurrentService] = useState(null);
@@ -12,7 +13,7 @@ const About = ({services}) => {
     const [index, setIndex] = useState(0);
 
     useEffect(() => {
-                setServicesList(services)
+        setServicesList(services)
     }, [services])
     useEffect(() => {
         servicesList && setCurrentService(servicesList[index])
@@ -39,24 +40,7 @@ const About = ({services}) => {
             <Article>
                 <Section>
                     <motion.h5 initial={{opacity: 0}} animate={{opacity: 1}} transition={{ease: "easeIn", duration: 0.4}}>
-                        Pierwsza część opisu firmy
-                    </motion.h5>
-                    <motion.p initial={{opacity: 0}} animate={{opacity: 1}} transition={{ ease: "easeIn", duration: 0.8 }}>
-                        consectetur elit.<br/>
-                        Praesent dictum cursus ex, quis faucibus nibh elementum a.<br/>
-                        Pellentesque sit amet ligula felis non lectus accumsan.<br/>
-                        Nullam vehicula lacus non lectus accumsanfermentum ,<br/>
-                        ut auctor magna blandit. Nulla facilisi magna blandit.<br/>
-                        Praesent eleifend fringilla est facilisis porttitor dictum justo.<br/>
-                        Nullam fermentum semper neque dictum justo dictum justo,<br/>
-                        et dictum justo mollis quis. Nulla facilisi ipsum nec magna .<br/>
-                        Suspendisse potenti Curabitur in ipsum nec magna.<br/>
-                        Curabitur in ipsum nec magna placerat elementum
-                    </motion.p>
-                </Section>
-                <Section>
-                    <motion.h5 initial={{opacity: 0}} animate={{opacity: 1}} transition={{ease: "easeIn", duration: 0.6}}>
-                        Druga część opisu firmy
+                        Opis firmy
                     </motion.h5>
                     <motion.p initial={{opacity: 0}} animate={{opacity: 1}} transition={{ ease: "easeIn", duration: 0.8 }}>
                         consectetur elit.<br/>
@@ -81,18 +65,13 @@ const About = ({services}) => {
                     <ArrowRight className='arrow' onClick={() => indexHandler('right')}/>
                 </CircleContainer>
                 <Presentation id='pres'>
-                    <h5>{currentService && currentService.name}</h5>
-                    <p>
-                        {currentService && currentService.shortDescription}
-                    </p>
-                    <button>
-                        <Link id='pres-link' to={`/uslugi/${currentService && currentService.name}`}>Czytaj więcej</Link>
-                    </button>
+                    <Pres currentService={currentService}/>
                 </Presentation>
             </Services>
         </Wrap>
     )
 }
+
 const Wrap = styled.main`
   margin: 2% 0;
   max-width: 100%;
@@ -119,6 +98,7 @@ const Article = styled.article`
   @media screen and (max-width: 768px){
     display: flex;
     flex-direction: column;
+    text-align: center;
   }
 `
 const Section = styled.section`
@@ -132,9 +112,8 @@ const Services = motion.custom(styled.article`
   background: #F5F5F5;
   padding: 0 0 2%;
   max-width: 100%;
-  
-  
 `)
+
 const Presentation = styled.div`
   background: #a70a44;
   width: 45rem;
@@ -148,8 +127,10 @@ const Presentation = styled.div`
 
   @media screen and (max-width: 768px){
     max-width: 100vw;
+    border-radius: 0;
   }
 `
+
 export default withRouter(About);
 
 

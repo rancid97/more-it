@@ -4,7 +4,6 @@ import './styles/ratings.css'
 import {motion} from "framer-motion";
 import Opinion from "./opinon";
 import {CardDeck} from "react-bootstrap";
-//resolve text highlight on arrow click
 
 const Ratings = ({ratings}) => {
     const [rating, setRating] = useState(null);
@@ -24,8 +23,6 @@ const Ratings = ({ratings}) => {
     )
 }
 const Main = motion.custom(styled.article`
-  //height: 50vh;
-  //margin: 20vh 0;
   text-align: center;
   h3{
     font-weight: bold;
@@ -38,11 +35,6 @@ const Main = motion.custom(styled.article`
     @media screen and(max-width: 1440px){
       margin: 0;
     }
-  }
-  
-
-  @media screen and (max-width: 768px) {
-    margin: 0;
   }
 `)
 
