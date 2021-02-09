@@ -1,13 +1,34 @@
 const router = require('express').Router()
 let Ticket = require('../models/ticket.model')
+let Admin = require('../models/admin.model')
+const bcrypt = require('bcrypt')
+
+
+//admin register
+/*router.route('/register').post(async (req,res) => {
+    const username = req.body.username
+    const salt = await bcrypt.genSalt()
+    const hashedPassword = await bcrypt.hash(req.body.password, salt)
+    const newAdmin = new Admin({username: username, password: hashedPassword})
+    newAdmin.save()
+        .then(() => res.json('Admin registered'))
+        .catch(err => res.status(400).json('Error: ' + err))
+})*/
 
 //admin login
-router.route('/add').post((req,res) => {
-    if(req.body.password === process.env.ADMIN_PASSWORD){
-        Ticket.find()
-            .then(tickets => res.json(tickets))
-            .catch(err => res.status(400).json('Error: ' + err))
-    } else res.send('bad password')
+router.route('/login').post( async(req, res) => {
+    try {
+        const admin = await Admin.findOne({username: req.body.username}).exec()
+        if(await bcrypt.compare(req.body.password, admin.password)){
+            Ticket.find()
+                .then(tickets => res.json(tickets))
+                .catch(err => res.status(400).json('Error: ' + err))
+        } else {
+            res.status(401).send('failed login')
+        }
+    } catch {
+        res.status(401).send('user does not exist')
+    }
 })
 
 router.route('/delete').delete((req,res) => {

@@ -21,7 +21,7 @@ const App = () => {
             .catch(err => console.log(err))
     },[])
     useEffect(() => {
-        axios.get('https://moreit.herokuapp.com/ratings')
+        axios.get('http://localhost:5000/ratings')
             .then(res => {
                 setRatings(res.data);
             })

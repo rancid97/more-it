@@ -4,16 +4,21 @@ import styled from "styled-components";
 import Ticket from "./ticket";
 const Admin = () => {
     const [password, setPassword] = useState(null);
+    const [username, setUsername] = useState(null)
     const [response, setResponse] = useState(null);
     const checkCredentials = () => {
         const credentials = {
-            password: password.toString()
+            password: password.toString(),
+            username: username.toString()
         }
-        axios.post('http://localhost:5000/admin/add', credentials)
+        axios.post('http://localhost:5000/admin/login', credentials)
             .then(res => setResponse(res.data));
     }
     const passwordHandler = (e) => {
         setPassword(e.target.value);
+    }
+    const userNameHandler = (e) => {
+        setUsername(e.target.value);
     }
     const deleteTicketHandler = (id) => {
         axios.delete('http://localhost:5000/admin/delete', {data: {id:id}})
@@ -30,7 +35,10 @@ const Admin = () => {
     }
     return(
         <>
-            <input type='text' onChange={passwordHandler}/>
+            <label>Username: </label>
+            <input type='text' onChange={userNameHandler}/><br/>
+            <label>Password: </label>
+            <input type='text' onChange={passwordHandler}/><br/>
             <button type='button' onClick={checkCredentials}>Zaloguj</button>
             <Article>
             {response && response.map(ticket =>
