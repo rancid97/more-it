@@ -1,6 +1,7 @@
 const router = require('express').Router()
 let Ticket = require('../models/ticket.model')
 let Admin = require('../models/admin.model')
+let Service = require('../models/service.model')
 const bcrypt = require('bcrypt')
 
 
@@ -50,4 +51,33 @@ router.route('/update').post((req,res) => {
         }
     })
 })
+
+router.route('/update-info').post(async (req,res) => {
+    let content = req.body.content
+    const contentType = req.body.contentType
+    if(contentType === 'list'){
+        content = content.split(',')
+    }
+    try {
+        const admin = await Admin.findOne({username: req.body.username}).exec()
+        if(await bcrypt.compare(req.body.password, admin.password)){
+            Ticket.find()
+                .then(
+                    Service.findOneAndUpdate({name: req.body.name}, {$set: {[contentType]: content}}, {useFindAndModify: false,upsert: true, new: true}, (err) => {
+                        if(err){
+                            res.send(err)
+                        } else {
+                            res.send('changed')
+                        }
+                    })
+                )
+                .catch(err => res.status(400).json('Error: ' + err))
+        } else {
+            res.status(401).send('failed login')
+        }
+    } catch {
+        res.status(401).send('user does not exist')
+    }
+})
+
 module.exports = router

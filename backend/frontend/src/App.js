@@ -37,7 +37,7 @@ const App = () => {
           <Route path='/opinie' render={() => <Ratings ratings={ratings}/>}/>
           <Route path='/kontakt' exact render={() => <Contact services={services}/>}/>
           <Route path='/kontakt/:service' render={() => <Contact services={services}/>}/>
-          <Route path='/admin' component={Admin}/>
+          <Route path='/admin' render={() => <Admin services={services}/>}/>
           <Footer/>
       </Router>
   )
