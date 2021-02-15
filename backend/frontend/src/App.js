@@ -23,21 +23,21 @@ const App = () => {
             .catch(err => console.log(err))
     },[])
     useEffect(() => {
-        axios.get('http://localhost:5000/footer')
+        axios.get('https://moreit.herokuapp.com/footer')
             .then(res => {
                 setFooterData(res.data);
             })
             .catch(err => console.log(err))
     },[])
     useEffect(() => {
-        axios.get('http://localhost:5000/description')
+        axios.get('https://moreit.herokuapp.com/description')
             .then(res => {
                 setDescription(res.data);
             })
             .catch(err => console.log(err))
     },[])
     useEffect(() => {
-        axios.get('http://localhost:5000/ratings')
+        axios.get('https://moreit.herokuapp.com/ratings')
             .then(res => {
                 setRatings(res.data);
             })

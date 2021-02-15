@@ -17,7 +17,7 @@ const Admin = ({services}) => {
             password: password.toString(),
             username: username.toString()
         }
-        axios.post('http://localhost:5000/admin/login', credentials)
+        axios.post('https://moreit.herokuapp.com/admin/login', credentials)
             .then(res => setResponse(res.data));
     }
     const passwordHandler = (e) => {
@@ -59,7 +59,7 @@ const Admin = ({services}) => {
             password: password.toString(),
             username: username.toString()
         }
-        axios.post('http://localhost:5000/admin/update-info', data)
+        axios.post('https://moreit.herokuapp.com/admin/update-info', data)
             .then(res => {
                 setInfoDisplay(res.data)
             })
@@ -96,7 +96,7 @@ const Admin = ({services}) => {
             password: password.toString(),
             username: username.toString()
         }
-        axios.post('http://localhost:5000/admin/service-add', data)
+        axios.post('https://moreit.herokuapp.com/admin/service-add', data)
             .then(res => setAddServiceInfo(res.data))
     }
 
@@ -117,7 +117,7 @@ const Admin = ({services}) => {
             password: password.toString(),
             username: username.toString()
         }
-        axios.post('http://localhost:5000/admin/service-delete', data)
+        axios.post('https://moreit.herokuapp.com/admin/service-delete', data)
             .then(res => setDeleteServiceInfo(res.data))
     }
 
@@ -155,7 +155,7 @@ const Admin = ({services}) => {
             password: password.toString(),
             username: username.toString()
         }
-        axios.post('http://localhost:5000/admin/rating-add', data)
+        axios.post('https://moreit.herokuapp.com/admin/rating-add', data)
             .then(res => setAddRatingInfo(res.data))
     }
     //////////////////////////////////////////////////
@@ -176,7 +176,7 @@ const Admin = ({services}) => {
             password: password.toString(),
             username: username.toString()
         }
-        axios.post('http://localhost:5000/admin/rating-delete', data)
+        axios.post('https://moreit.herokuapp.com/admin/rating-delete', data)
             .then(res => setDeleteRatingInfo(res.data))
     }
 
@@ -200,7 +200,7 @@ const Admin = ({services}) => {
             password: password.toString(),
             username: username.toString()
         }
-        axios.post('http://localhost:5000/admin/update-description', data)
+        axios.post('https://moreit.herokuapp.com/admin/update-description', data)
             .then(res => setAboutInfo(res.data))
     }
     //////////////////////////////////////////////////
@@ -244,7 +244,7 @@ const Admin = ({services}) => {
             password: password.toString(),
             username: username.toString()
         }
-        axios.post('http://localhost:5000/admin/update-footer', data)
+        axios.post('https://moreit.herokuapp.com/admin/update-footer', data)
             .then(res => setFooterInfo(res.data))
     }
     //////////////////////////////////////////////////
@@ -252,7 +252,7 @@ const Admin = ({services}) => {
     //OBSŁUGA ZGŁOSZEŃ
 
     const deleteTicketHandler = (id) => {
-        axios.delete('http://localhost:5000/admin/delete', {data: {id:id}})
+        axios.delete('https://moreit.herokuapp.com/admin/delete', {data: {id:id}})
             .then(res => console.log(res.data))
             .then(checkCredentials)
     }
@@ -260,7 +260,7 @@ const Admin = ({services}) => {
         const ticket = {
             id: id
         }
-        axios.post('http://localhost:5000/admin/update',ticket)
+        axios.post('https://moreit.herokuapp.com/admin/update',ticket)
             .then(res => console.log(res))
             .then(checkCredentials)
     }
