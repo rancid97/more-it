@@ -37,11 +37,15 @@ const Wrap = styled.main`
     margin: 2% auto;
     padding: 1rem 2rem;
     display: block;
-    background: #a70a44;
+    background: #4966c4;
     font-weight: bold;
     font-size: larger;
     border: none;
     border-radius: 1rem;
+    transition: all ease 0.2s;
+  }
+  button:hover{
+    transform: scale(1.2);
   }
 `
 const Article = styled.article`
@@ -49,7 +53,7 @@ const Article = styled.article`
   padding: 0 10%;
   background: #F5F5F5;
   color: #686D8F;
-  min-height: 70vh;
+  min-height: 65vh;
   
   section{
     max-width: 50%;
