@@ -67,17 +67,13 @@ router.route('/update-info').post(async (req,res) => {
     try {
         const admin = await Admin.findOne({username: req.body.username}).exec()
         if(await bcrypt.compare(req.body.password, admin.password)){
-            Ticket.find()
-                .then(
-                    Service.findOneAndUpdate({name: req.body.name}, {$set: {[contentType]: content}}, {useFindAndModify: false,upsert: true, new: true}, (err) => {
-                        if(err){
-                            res.send(err)
-                        } else {
-                            res.send('changed')
-                        }
-                    })
-                )
-                .catch(err => res.status(400).json('Error: ' + err))
+            Service.findOneAndUpdate({name: req.body.name}, {$set: {[contentType]: content}}, {useFindAndModify: false,upsert: true, new: true}, (err) => {
+                if(err){
+                    res.send(err)
+                } else {
+                    res.send('Zmieniono')
+                }
+            })
         } else {
             res.status(401).send('failed login')
         }
@@ -98,7 +94,7 @@ router.route('/service-add').post(async (req,res) => {
         const admin = await Admin.findOne({username: req.body.username}).exec()
         if(await bcrypt.compare(req.body.password, admin.password)){
             newService.save()
-                .then(() => res.json('Service Added'))
+                .then(() => res.json('Dodano usługę'))
                 .catch(err => res.status(400).json('Error: ' + err))
         } else {
             res.status(401).send('failed login')
@@ -118,7 +114,7 @@ router.route('/service-delete').post(async (req,res) => {
                 if(err){
                     res.send(err);
                 } else {
-                    res.send(`Service named: ${req.body.name} has been removed from database`)
+                    res.send(`Usługa : ${req.body.name} została usunięta z bazy danych`)
                 }
             })
         } else {
@@ -141,7 +137,7 @@ router.route('/rating-add').post(async (req,res) => {
         const admin = await Admin.findOne({username: req.body.username}).exec()
         if(await bcrypt.compare(req.body.password, admin.password)){
             await newRating.save()
-                .then(() => res.json('Rating Added'))
+                .then(() => res.json('Dodano ocenę'))
                 .catch(err => res.status(400).json('Error: ' + err))
         } else {
             res.status(401).send('failed login')
@@ -157,7 +153,7 @@ router.route('/rating-delete').post(async (req,res) => {
         const admin = await Admin.findOne({username: req.body.username}).exec()
         if(await bcrypt.compare(req.body.password, admin.password)){
             Rating.findOneAndDelete({name: req.body.name})
-                .then(() => res.json('Rating Deleted'))
+                .then(() => res.json('Usunięto ocenę'))
                 .catch(err => res.status(400).json('Error: ' + err))
         } else {
             res.status(401).send('failed login')
@@ -176,7 +172,7 @@ router.route('/update-description').post(async (req,res) => {
                 if(err){
                     res.send(err)
                 } else {
-                    res.send('changed')
+                    res.send('Zmieniono opis')
                 }
             })
         } else {
@@ -195,7 +191,7 @@ router.route('/update-footer').post(async (req,res) => {
                 if(err){
                     res.send(err)
                 } else {
-                    res.send('changed')
+                    res.send('Zmieniono stopke')
                 }
             })
         } else {

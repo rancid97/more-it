@@ -104,6 +104,7 @@ const Section = styled.section`
   p{
     max-width:40vw;
     word-wrap:break-word;
+    margin: auto;
   }
 `
 const Services = motion.custom(styled.article`

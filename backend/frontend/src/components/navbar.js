@@ -13,7 +13,11 @@ const NavBar = ({services}) => {
     return (
         <motion.main initial={{x: -200, opacity: 0}} animate={{x: 0, opacity: 1}} transition={{ease: "easeIn", duration: 1}} exit={{ opacity: 1 }}>
             <Navbar bg="light" expand="lg">
-                <Navbar.Brand as={Link} to="/"><img src={logo} alt='Mateusz Orzełek, Administrowanie Systemami Informatycznymi'/></Navbar.Brand>
+                <Navbar.Brand style={{textAlign: 'center'}} as={Link} to="/">
+                    <img src={logo} alt='Mateusz Orzełek, Administrowanie Systemami Informatycznymi'/>
+                    <p style={{padding: 0, margin: 0, fontWeight: 'bold', fontSize: '14px'}}>Mateusz Orzełek</p>
+                    <p style={{padding: 0, margin: 0, fontSize: '12px'}}>Administrowanie systemami informatycznymi</p>
+                </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav style={{marginLeft: '20%'}} className="mr-auto font-weight-bold" >

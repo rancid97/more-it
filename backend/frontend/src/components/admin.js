@@ -7,7 +7,7 @@ const Admin = ({services}) => {
     const [password, setPassword] = useState(null);
     const [username, setUsername] = useState(null);
     const [response, setResponse] = useState(null);
-    const [infoDisplay, setInfoDisplay] = useState(null);
+
 
     //////////////////////////////////////////////////
     //LOGOWANIE
@@ -35,6 +35,7 @@ const Admin = ({services}) => {
     const [service,setService] = useState('');
     const [serviceType, setServiceType] = useState('');
     const [content, setContent] = useState('');
+    const [infoDisplay, setInfoDisplay] = useState(null);
 
     useEffect(() => {
         services && setService(services[0].name);
@@ -60,17 +61,8 @@ const Admin = ({services}) => {
         }
         axios.post('http://localhost:5000/admin/update-info', data)
             .then(res => {
-                if(res.data === 'changed'){
-                    setInfoDisplay('Wysłano')
-                } else {
-                    setInfoDisplay('Nie wysłano')
-                }
-
+                setInfoDisplay(res.data)
             })
-            .catch(
-                setInfoDisplay('Nie wysłano')
-            )
-        ;
     }
     //////////////////////////////////////////////////
 
@@ -81,6 +73,7 @@ const Admin = ({services}) => {
     const [newShortDescription, setNewShortDescription] = useState('');
     const [newFullDescription, setNewFullDescription] = useState('');
     const [newList, setNewList] = useState('');
+    const [addServiceInfo, setAddServiceInfo] = useState(null);
 
     const newServiceNameHandler = (e) => {
         setNewServiceName(e.target.value)
@@ -104,7 +97,7 @@ const Admin = ({services}) => {
             username: username.toString()
         }
         axios.post('http://localhost:5000/admin/service-add', data)
-            .then(res => console.log(res.data))
+            .then(res => setAddServiceInfo(res.data))
     }
 
     //////////////////////////////////////////////////
@@ -112,6 +105,7 @@ const Admin = ({services}) => {
     //////////////////////////////////////////////////
     //USUWANIE USLUG
     const [serviceToDelete, setServiceToDelete] = useState(null);
+    const [deleteServiceInfo, setDeleteServiceInfo] = useState(null);
 
     const serviceToDeleteHandler = (e) => {
         setServiceToDelete(e.target.value)
@@ -124,7 +118,7 @@ const Admin = ({services}) => {
             username: username.toString()
         }
         axios.post('http://localhost:5000/admin/service-delete', data)
-            .then(res => console.log(res.data))
+            .then(res => setDeleteServiceInfo(res.data))
     }
 
 
@@ -137,6 +131,7 @@ const Admin = ({services}) => {
     const [ratingStars, setRatingStars] = useState('');
     const [ratingText, setRatingText] = useState('');
     const [ratingService, setRatingService] = useState('');
+    const [addRatingInfo, setAddRatingInfo] = useState(null);
 
     const ratingNameHandler = (e) => {
         setRatingName(e.target.value)
@@ -161,7 +156,7 @@ const Admin = ({services}) => {
             username: username.toString()
         }
         axios.post('http://localhost:5000/admin/rating-add', data)
-            .then(res => console.log(res))
+            .then(res => setAddRatingInfo(res.data))
     }
     //////////////////////////////////////////////////
 
@@ -169,6 +164,7 @@ const Admin = ({services}) => {
     //USUWANIE OCEN
 
     const [deletedRatingName, setDeletedRatingName] = useState('');
+    const [deleteRatingInfo, setDeleteRatingInfo] = useState(null);
 
     const deleteRatingNameHandler = (e) => {
         setDeletedRatingName(e.target.value)
@@ -181,7 +177,7 @@ const Admin = ({services}) => {
             username: username.toString()
         }
         axios.post('http://localhost:5000/admin/rating-delete', data)
-            .then(res => console.log(res))
+            .then(res => setDeleteRatingInfo(res.data))
     }
 
     //////////////////////////////////////////////////
@@ -189,6 +185,7 @@ const Admin = ({services}) => {
     //ZMIANA OPISU FIRMY
     const [aboutDescription, setAboutDescription] = useState('');
     const [aboutHeader, setAboutHeader] = useState('');
+    const [aboutInfo, setAboutInfo] = useState(null);
 
     const aboutHeaderHandler = (e) => {
         setAboutHeader(e.target.value)
@@ -204,7 +201,7 @@ const Admin = ({services}) => {
             username: username.toString()
         }
         axios.post('http://localhost:5000/admin/update-description', data)
-            .then(res => console.log(res))
+            .then(res => setAboutInfo(res.data))
     }
     //////////////////////////////////////////////////
     //////////////////////////////////////////////////
@@ -215,6 +212,7 @@ const Admin = ({services}) => {
     const [footerPhone, setFooterPhone] = useState('');
     const [footerEmail, setFooterEmail] = useState('');
     const [footerQuote, setFooterQuote] = useState('');
+    const [footerInfo, setFooterInfo] = useState(null);
 
     const footerNameHandler = (e) => {
         setFooterName(e.target.value)
@@ -247,7 +245,7 @@ const Admin = ({services}) => {
             username: username.toString()
         }
         axios.post('http://localhost:5000/admin/update-footer', data)
-            .then(res => console.log(res))
+            .then(res => setFooterInfo(res.data))
     }
     //////////////////////////////////////////////////
     //////////////////////////////////////////////////
@@ -311,10 +309,10 @@ const Admin = ({services}) => {
                                         <Form.Label>Treść (w przypadku listy elementy oddzielone znakiem , )</Form.Label>
                                         <Form.Control as="textarea" onChange={contentHandler}/>
                                     </Form.Group>
-                                    <Button variant="secondary" type="button" className='ml-1' onClick={updateServiceHandler}>
+                                    <Button variant="success" type="button" className='ml-1' onClick={updateServiceHandler}>
                                         Zmień
                                     </Button>
-                                    {infoDisplay && <Badge variant='info'>{infoDisplay}</Badge>}
+                                    {infoDisplay && <Badge className='ml-5' variant='info'>{infoDisplay}</Badge>}
                                 </Card.Body>
                             </Accordion.Collapse>
                         </Card>
@@ -355,6 +353,7 @@ const Admin = ({services}) => {
                                     <Button variant="secondary" type="button" className='ml-1' onClick={addServiceHandler}>
                                         Dodaj
                                     </Button>
+                                    {addServiceInfo && <Badge className='ml-5' variant='info'>{addServiceInfo}</Badge>}
                                 </Card.Body>
                             </Accordion.Collapse>
                         </Card>
@@ -375,9 +374,10 @@ const Admin = ({services}) => {
                                                 )}
                                             </Form.Control>
                                         </Form.Group>
-                                        <Button variant="secondary" type="button" className='ml-1' onClick={deleteServiceHandler}>
+                                        <Button variant="danger" type="button" className='ml-1' onClick={deleteServiceHandler}>
                                             Usuń
                                         </Button>
+                                        {deleteServiceInfo && <Badge className='ml-5' variant='info'>{deleteServiceInfo}</Badge>}
                                     </Card.Body>
                                 </Accordion.Collapse>
                             </Card.Header>
@@ -410,6 +410,7 @@ const Admin = ({services}) => {
                                         <Button variant="secondary" type="button" className='ml-1' onClick={addRatingHandler}>
                                             Dodaj
                                         </Button>
+                                        {addRatingInfo && <Badge className='ml-5' variant='info'>{addRatingInfo}</Badge>}
                                     </Card.Body>
                                 </Accordion.Collapse>
                             </Card.Header>
@@ -430,6 +431,7 @@ const Admin = ({services}) => {
                                         <Button variant="danger" type="button" className='ml-1' onClick={deleteRatingHandler}>
                                             Usuń
                                         </Button>
+                                        {deleteRatingInfo && <Badge className='ml-5' variant='info'>{deleteRatingInfo}</Badge>}
                                     </Card.Body>
                                 </Accordion.Collapse>
                             </Card.Header>
@@ -451,9 +453,10 @@ const Admin = ({services}) => {
                                             <Form.Label>Tekst</Form.Label>
                                             <Form.Control onChange={aboutDescriptionHandler}/>
                                         </Form.Group>
-                                        <Button variant="secondary" type="button" className='ml-1' onClick={changeAboutHandler}>
+                                        <Button  variant="secondary" type="button" className='ml-1' onClick={changeAboutHandler}>
                                             Zmień
                                         </Button>
+                                        {aboutInfo && <Badge className='ml-5' variant='info'>{aboutInfo}</Badge>}
                                     </Card.Body>
                                 </Accordion.Collapse>
                             </Card.Header>
@@ -494,6 +497,7 @@ const Admin = ({services}) => {
                                         <Button variant="secondary" type="button" className='ml-1' onClick={changeFooterHandler}>
                                             Zmień
                                         </Button>
+                                        {footerInfo && <Badge className='ml-5' variant='info'>{footerInfo}</Badge>}
                                     </Card.Body>
                                 </Accordion.Collapse>
                             </Card.Header>
