@@ -24,12 +24,16 @@ const usersRouter = require('./routes/users')
 const ratingsRouter = require('./routes/ratings')
 const serviceRouter = require('./routes/services')
 const adminRouter = require('./routes/admin')
+const footerRouter = require('./routes/footer')
+const descriptionRouter = require('./routes/description')
 
 app.use('/tickets', ticketsRouter)
 app.use('/users', usersRouter)
 app.use('/ratings', ratingsRouter)
 app.use('/services', serviceRouter)
 app.use('/admin', adminRouter)
+app.use('/footer', footerRouter)
+app.use('/description', descriptionRouter)
 
 
 if(process.env.NODE_ENV === 'production'){
